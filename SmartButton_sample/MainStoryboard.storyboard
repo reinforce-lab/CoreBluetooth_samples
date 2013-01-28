@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="12C3012" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="5">
+            <objects>
+                <viewController id="2" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="RSSI:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HWv-3o-zmW">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hLM-Li-UlH">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="45" id="RyS-ih-O1e"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="スイッチ1:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vBR-Zg-L84">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="82" id="uUe-Ae-6dn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="OFF" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pcP-vT-RTp">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="82" id="0ka-O7-PFW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="スイッチ2:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pAF-aW-kfF">
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="OFF" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uqW-Y7-vIf">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="電池:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bnb-8C-pxd">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="crD-EB-ZC7">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="are-7V-IYA"/>
+                                </constraints>
+                            </progressView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AM7-Vn-Qay">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mpR-ne-1So">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="ieX-8Z-GpE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <progressView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Co7-rq-INW"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XBy-Cw-rrl">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="189" id="4Zj-MU-3tz"/>
+                                    <constraint firstAttribute="height" constant="39" id="GlG-FO-aWe"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Scan">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected" title="Connected">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0588715764" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="scanButtonTouchUpInside:" destination="2" eventType="touchUpInside" id="vEh-t4-tGr"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="baA-ms-4DY"/>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="HWv-3o-zmW" firstAttribute="top" secondItem="3" secondAttribute="top" constant="20" symbolic="YES" type="default" id="3Ak-wm-Upn"/>
+                            <constraint firstItem="hLM-Li-UlH" firstAttribute="top" secondItem="3" secondAttribute="top" constant="20" symbolic="YES" type="default" id="3Ds-eA-5fW"/>
+                            <constraint firstItem="mpR-ne-1So" firstAttribute="trailing" secondItem="3" secondAttribute="trailing" type="default" id="5KV-ID-jiN"/>
+                            <constraint firstItem="crD-EB-ZC7" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="99" id="6zv-aa-Uyc"/>
+                            <constraint firstItem="vBR-Zg-L84" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="6" id="9ly-qe-MMG"/>
+                            <constraint firstItem="XBy-Cw-rrl" firstAttribute="top" secondItem="3" secondAttribute="top" constant="227" id="E1G-BF-RdF"/>
+                            <constraint firstItem="pAF-aW-kfF" firstAttribute="top" secondItem="3" secondAttribute="top" constant="101" id="EKy-Rl-8dT"/>
+                            <constraint firstItem="uqW-Y7-vIf" firstAttribute="leading" secondItem="pcP-vT-RTp" secondAttribute="leading" type="default" id="G9i-Yf-NR5"/>
+                            <constraint firstItem="Co7-rq-INW" firstAttribute="leading" secondItem="crD-EB-ZC7" secondAttribute="leading" type="default" id="GBe-U0-mbk"/>
+                            <constraint firstItem="pAF-aW-kfF" firstAttribute="trailing" secondItem="bnb-8C-pxd" secondAttribute="trailing" type="default" id="IX2-hr-sT8"/>
+                            <constraint firstItem="vBR-Zg-L84" firstAttribute="top" secondItem="3" secondAttribute="top" constant="60" id="Iht-hZ-frO"/>
+                            <constraint firstItem="hLM-Li-UlH" firstAttribute="leading" secondItem="AM7-Vn-Qay" secondAttribute="leading" type="default" id="LP5-cy-32u"/>
+                            <constraint firstItem="crD-EB-ZC7" firstAttribute="centerY" secondItem="HWv-3o-zmW" secondAttribute="centerY" type="default" id="NF8-gz-S1H"/>
+                            <constraint firstItem="crD-EB-ZC7" firstAttribute="trailing" secondItem="Co7-rq-INW" secondAttribute="trailing" type="default" id="Ohk-A4-X34"/>
+                            <constraint firstItem="uqW-Y7-vIf" firstAttribute="baseline" secondItem="pAF-aW-kfF" secondAttribute="baseline" type="default" id="PRl-un-Uo2"/>
+                            <constraint firstItem="Co7-rq-INW" firstAttribute="centerY" secondItem="bnb-8C-pxd" secondAttribute="centerY" type="default" id="X7S-4y-9hv"/>
+                            <constraint firstItem="baA-ms-4DY" firstAttribute="top" secondItem="3" secondAttribute="top" constant="203" id="Xgb-xb-6FD"/>
+                            <constraint firstItem="mpR-ne-1So" firstAttribute="baseline" secondItem="AM7-Vn-Qay" secondAttribute="baseline" type="default" id="ZdE-QS-cMl"/>
+                            <constraint firstAttribute="trailing" secondItem="hLM-Li-UlH" secondAttribute="trailing" constant="15" id="a10-GC-hjF"/>
+                            <constraint firstItem="XBy-Cw-rrl" firstAttribute="centerX" secondItem="baA-ms-4DY" secondAttribute="centerX" type="default" id="b3g-kn-qBh"/>
+                            <constraint firstItem="vBR-Zg-L84" firstAttribute="trailing" secondItem="HWv-3o-zmW" secondAttribute="trailing" type="default" id="cSf-o1-OBA"/>
+                            <constraint firstItem="pAF-aW-kfF" firstAttribute="trailing" secondItem="vBR-Zg-L84" secondAttribute="trailing" type="default" id="eJK-Eo-JVC"/>
+                            <constraint firstItem="vBR-Zg-L84" firstAttribute="baseline" secondItem="pcP-vT-RTp" secondAttribute="baseline" type="default" id="f2S-j3-LNJ"/>
+                            <constraint firstItem="AM7-Vn-Qay" firstAttribute="baseline" secondItem="bnb-8C-pxd" secondAttribute="baseline" type="default" id="fXd-FU-3Fe"/>
+                            <constraint firstItem="uqW-Y7-vIf" firstAttribute="top" secondItem="pAF-aW-kfF" secondAttribute="top" type="default" id="kEJ-KM-ygT"/>
+                            <constraint firstItem="vBR-Zg-L84" firstAttribute="top" secondItem="pcP-vT-RTp" secondAttribute="top" type="default" id="mOA-T2-oDN"/>
+                            <constraint firstItem="pcP-vT-RTp" firstAttribute="centerX" secondItem="crD-EB-ZC7" secondAttribute="centerX" type="default" id="myx-QP-HvE"/>
+                            <constraint firstItem="pAF-aW-kfF" firstAttribute="leading" secondItem="vBR-Zg-L84" secondAttribute="leading" type="default" id="sbF-8A-Q42"/>
+                            <constraint firstItem="bnb-8C-pxd" firstAttribute="top" secondItem="3" secondAttribute="top" constant="141" id="vYN-wf-t49"/>
+                            <constraint firstItem="uqW-Y7-vIf" firstAttribute="trailing" secondItem="pcP-vT-RTp" secondAttribute="trailing" type="default" id="yA6-7r-7kk"/>
+                            <constraint firstItem="hLM-Li-UlH" firstAttribute="trailing" secondItem="AM7-Vn-Qay" secondAttribute="trailing" type="default" id="zD2-Kd-5qh"/>
+                            <constraint firstItem="XBy-Cw-rrl" firstAttribute="centerX" secondItem="3" secondAttribute="centerX" type="default" id="zrw-NE-pie"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="BatteryPercentTextLabel" destination="mpR-ne-1So" id="teU-ok-8sR"/>
+                        <outlet property="BatteryProgressBar" destination="Co7-rq-INW" id="PPp-i8-bZz"/>
+                        <outlet property="BatteryTextLabel" destination="bnb-8C-pxd" id="S7I-2v-oV5"/>
+                        <outlet property="BatteryValueTextLabel" destination="AM7-Vn-Qay" id="zEs-Yb-CrX"/>
+                        <outlet property="RSSIProgressBar" destination="crD-EB-ZC7" id="DIe-66-hAt"/>
+                        <outlet property="RSSITextLabel" destination="HWv-3o-zmW" id="aDb-M6-rVl"/>
+                        <outlet property="RSSIValueTextLabel" destination="hLM-Li-UlH" id="v0q-vV-P6l"/>
+                        <outlet property="ScanActivityIndicator" destination="baA-ms-4DY" id="JFx-FX-u7a"/>
+                        <outlet property="ScanButton" destination="XBy-Cw-rrl" id="rRJ-ZZ-WDb"/>
+                        <outlet property="SwitchTextLabel" destination="vBR-Zg-L84" id="59l-NM-evb"/>
+                        <outlet property="switch1StatusTextLabel" destination="pcP-vT-RTp" id="S13-67-p02"/>
+                        <outlet property="switch2StatusTextLabel" destination="uqW-Y7-vIf" id="VwJ-Xh-mAE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+    <classes>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="ViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="scanButtonTouchUpInside:"/>
+                <relationship kind="outlet" name="BatteryPercentTextLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="BatteryProgressBar" candidateClass="UIProgressView"/>
+                <relationship kind="outlet" name="BatteryTextLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="BatteryValueTextLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="RSSIProgressBar" candidateClass="UIProgressView"/>
+                <relationship kind="outlet" name="RSSITextLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="RSSIValueTextLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="ScanActivityIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="ScanButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="SwitchTextLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="switch1StatusTextLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="switch2StatusTextLabel" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+    </classes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
