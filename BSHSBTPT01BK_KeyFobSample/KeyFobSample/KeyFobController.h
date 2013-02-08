@@ -12,7 +12,7 @@
 typedef enum {
     NoAlert    = 0,
     MidAlert   = 1,
-    HigghAlert = 2,
+    HighAlert = 2,
 } AlertType;
 
 @interface KeyFobController : NSObject
@@ -28,6 +28,8 @@ typedef enum {
 
 @property (nonatomic, readonly) int  batteryLevel;
 @property (nonatomic, readonly) BOOL isSwitchPushed;
+
+@property (nonatomic) BOOL shouldNotifyPhoneCall;
 
 -(void)startScanning;
 -(void)stopScanning;

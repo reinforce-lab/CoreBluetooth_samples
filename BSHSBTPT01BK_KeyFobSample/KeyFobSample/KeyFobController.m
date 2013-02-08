@@ -7,6 +7,7 @@
 //
 
 #import "KeyFobController.h"
+#import <AudioToolbox/AudioToolbox.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 
 #define kTargetDeviceName          @"BSHSBTPT01BK"
@@ -72,6 +73,23 @@
 @synthesize batteryLevel;
 @synthesize isSwitchPushed;
 
+#pragma mark audio session interrupt handler
+static void audioSessionHandler(void *inClientData, UInt32 inInterruptionState) {
+    KeyFobController *ctr = (__bridge KeyFobController *)inClientData;
+
+    if(inInterruptionState == kAudioSessionBeginInterruption) {
+        NSLog(@"audio session begin interrupt.");
+        // 割り込みの開始
+        if(ctr.shouldNotifyPhoneCall) {
+            [ctr alert:HighAlert];
+        }
+    } else {
+        NSLog(@"audio session end interrupt.");
+        // 割り込みの終了
+        AudioSessionSetActive(YES);
+    }
+}
+
 #pragma mark Constructor
 -(id)init {
     self = [super init];
@@ -93,10 +111,19 @@
         _batteryLevelServiceUUID = [CBUUID UUIDWithString:kBatteryLevelServiceUUID];
         _batteryLevelUUID        = [CBUUID UUIDWithString:kBatteryLevelUUID];
         _batteryLevelSwitchUUID  = [CBUUID UUIDWithString:kBatteryLevelSwitchUUID];
+        
+        // Setting up AudioSession to detect a phone call.
+        AudioSessionInitialize(NULL, NULL,
+                       audioSessionHandler,
+                       (__bridge void *)self);
+
+        AudioSessionSetActive(YES);
     }
     return self;
 }
 -(void)dealloc {
+    AudioSessionSetActive(NO);
+    
     [self stopScanning];
     [self disconnect];
 }

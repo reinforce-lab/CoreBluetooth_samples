@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="12C3012" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C3012" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -62,6 +62,11 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="着信通知:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MrZ-TA-LaA">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <progressView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="crD-EB-ZC7">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="are-7V-IYA"/>
@@ -111,7 +116,7 @@
                                     <action selector="scanButtonTouchUpInside:" destination="2" eventType="touchUpInside" id="vEh-t4-tGr"/>
                                 </connections>
                             </button>
-                            <activityIndicatorView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="baA-ms-4DY"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="baA-ms-4DY"/>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ps0-nn-Xnh">
                                 <constraints>
                                     <constraint firstAttribute="width" constant="280" id="a3J-07-VF6"/>
@@ -125,41 +130,50 @@
                                     <action selector="linkLossLevelValueChanged:" destination="2" eventType="valueChanged" id="eif-9d-7BI"/>
                                 </connections>
                             </segmentedControl>
+                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q6h-rs-Vuc">
+                                <connections>
+                                    <action selector="notifyPhoneCallSwitchValueChanged:" destination="2" eventType="valueChanged" id="8Ty-g1-jap"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ujv-p0-rGq" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="82" id="1aV-ei-5TM"/>
-                            <constraint firstAttribute="bottom" secondItem="frT-7z-C0F" secondAttribute="bottom" constant="191" id="1sb-MF-Gpd"/>
                             <constraint firstItem="HWv-3o-zmW" firstAttribute="top" secondItem="3" secondAttribute="top" constant="20" symbolic="YES" type="default" id="3Ak-wm-Upn"/>
                             <constraint firstItem="AM7-Vn-Qay" firstAttribute="baseline" secondItem="mpR-ne-1So" secondAttribute="baseline" type="default" id="3Bj-fx-Avs"/>
                             <constraint firstItem="hLM-Li-UlH" firstAttribute="top" secondItem="3" secondAttribute="top" constant="20" symbolic="YES" type="default" id="3Ds-eA-5fW"/>
                             <constraint firstItem="crD-EB-ZC7" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="99" id="6zv-aa-Uyc"/>
                             <constraint firstItem="XBy-Cw-rrl" firstAttribute="centerX" secondItem="frT-7z-C0F" secondAttribute="centerX" type="default" id="7eB-xx-8Sd"/>
+                            <constraint firstItem="q6h-rs-Vuc" firstAttribute="centerX" secondItem="Co7-rq-INW" secondAttribute="centerX" type="default" id="85S-33-dUK"/>
                             <constraint firstItem="vBR-Zg-L84" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="6" id="9ly-qe-MMG"/>
                             <constraint firstItem="mpR-ne-1So" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="286" id="DEE-0T-99e"/>
+                            <constraint firstAttribute="bottom" secondItem="10a-kE-vTt" secondAttribute="bottom" constant="64" id="Dci-54-4Te"/>
                             <constraint firstItem="frT-7z-C0F" firstAttribute="centerX" secondItem="10a-kE-vTt" secondAttribute="centerX" type="default" id="Few-gU-7LS"/>
+                            <constraint firstAttribute="bottom" secondItem="ps0-nn-Xnh" secondAttribute="bottom" constant="178" id="Fph-qq-iKx"/>
                             <constraint firstItem="Co7-rq-INW" firstAttribute="leading" secondItem="crD-EB-ZC7" secondAttribute="leading" type="default" id="GBe-U0-mbk"/>
                             <constraint firstItem="vBR-Zg-L84" firstAttribute="top" secondItem="3" secondAttribute="top" constant="60" id="Iht-hZ-frO"/>
                             <constraint firstItem="hLM-Li-UlH" firstAttribute="leading" secondItem="AM7-Vn-Qay" secondAttribute="leading" type="default" id="LP5-cy-32u"/>
                             <constraint firstItem="crD-EB-ZC7" firstAttribute="centerY" secondItem="HWv-3o-zmW" secondAttribute="centerY" type="default" id="NF8-gz-S1H"/>
+                            <constraint firstAttribute="bottom" secondItem="ujv-p0-rGq" secondAttribute="bottom" constant="235" id="Nv1-Av-N3U"/>
                             <constraint firstItem="crD-EB-ZC7" firstAttribute="trailing" secondItem="Co7-rq-INW" secondAttribute="trailing" type="default" id="Ohk-A4-X34"/>
+                            <constraint firstItem="MrZ-TA-LaA" firstAttribute="centerY" secondItem="q6h-rs-Vuc" secondAttribute="centerY" type="default" id="RPk-lm-Dxz"/>
+                            <constraint firstItem="XBy-Cw-rrl" firstAttribute="top" secondItem="3" secondAttribute="top" constant="235" id="Tu7-Hp-YCS"/>
                             <constraint firstItem="pcP-vT-RTp" firstAttribute="baseline" secondItem="vBR-Zg-L84" secondAttribute="baseline" type="default" id="VQH-S1-9Dy"/>
-                            <constraint firstItem="ps0-nn-Xnh" firstAttribute="top" secondItem="3" secondAttribute="top" constant="252" id="Vbz-tz-cYA"/>
+                            <constraint firstItem="MrZ-TA-LaA" firstAttribute="leading" secondItem="ps0-nn-Xnh" secondAttribute="leading" type="default" id="ViZ-Kd-5gp"/>
+                            <constraint firstItem="q6h-rs-Vuc" firstAttribute="top" secondItem="3" secondAttribute="top" constant="148" id="Zfx-gf-ebT"/>
                             <constraint firstItem="vBR-Zg-L84" firstAttribute="trailing" secondItem="bnb-8C-pxd" secondAttribute="trailing" type="default" id="ZrX-m8-9aW"/>
                             <constraint firstAttribute="trailing" secondItem="hLM-Li-UlH" secondAttribute="trailing" constant="15" id="a10-GC-hjF"/>
+                            <constraint firstItem="MrZ-TA-LaA" firstAttribute="trailing" secondItem="bnb-8C-pxd" secondAttribute="trailing" type="default" id="a1E-AH-eun"/>
                             <constraint firstItem="XBy-Cw-rrl" firstAttribute="centerX" secondItem="baA-ms-4DY" secondAttribute="centerX" type="default" id="b3g-kn-qBh"/>
                             <constraint firstItem="bnb-8C-pxd" firstAttribute="centerY" secondItem="Co7-rq-INW" secondAttribute="centerY" type="default" id="bg7-vd-Vqm"/>
                             <constraint firstItem="vBR-Zg-L84" firstAttribute="trailing" secondItem="HWv-3o-zmW" secondAttribute="trailing" type="default" id="cSf-o1-OBA"/>
                             <constraint firstItem="AM7-Vn-Qay" firstAttribute="baseline" secondItem="bnb-8C-pxd" secondAttribute="baseline" type="default" id="fXd-FU-3Fe"/>
                             <constraint firstItem="bnb-8C-pxd" firstAttribute="top" secondItem="3" secondAttribute="top" constant="106" id="iPn-9A-3zr"/>
+                            <constraint firstItem="baA-ms-4DY" firstAttribute="top" secondItem="3" secondAttribute="top" constant="199" id="jt7-Kq-mlz"/>
                             <constraint firstItem="pcP-vT-RTp" firstAttribute="centerX" secondItem="crD-EB-ZC7" secondAttribute="centerX" type="default" id="myx-QP-HvE"/>
-                            <constraint firstItem="XBy-Cw-rrl" firstAttribute="top" secondItem="3" secondAttribute="top" constant="160" id="nCb-Fz-AYH"/>
-                            <constraint firstItem="baA-ms-4DY" firstAttribute="top" secondItem="3" secondAttribute="top" constant="136" id="oIj-Tj-1ZV"/>
                             <constraint firstItem="10a-kE-vTt" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="sQo-Ic-9AB"/>
-                            <constraint firstAttribute="bottom" secondItem="10a-kE-vTt" secondAttribute="bottom" constant="135" id="saU-we-vLY"/>
-                            <constraint firstItem="ps0-nn-Xnh" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="15" id="tff-Aq-y4h"/>
+                            <constraint firstAttribute="bottom" secondItem="frT-7z-C0F" secondAttribute="bottom" constant="120" id="xgs-8b-8NW"/>
                             <constraint firstItem="hLM-Li-UlH" firstAttribute="trailing" secondItem="AM7-Vn-Qay" secondAttribute="trailing" type="default" id="zD2-Kd-5qh"/>
-                            <constraint firstItem="ujv-p0-rGq" firstAttribute="top" secondItem="3" secondAttribute="top" constant="217" id="zi8-4Z-G4g"/>
                         </constraints>
                     </view>
                     <connections>
@@ -176,12 +190,41 @@
                         <outlet property="ScanButton" destination="XBy-Cw-rrl" id="rRJ-ZZ-WDb"/>
                         <outlet property="SwitchStatusTextLabel" destination="pcP-vT-RTp" id="ofD-Mx-qIa"/>
                         <outlet property="SwitchTextLabel" destination="vBR-Zg-L84" id="59l-NM-evb"/>
+                        <outlet property="notifyByPhoneCallSwitch" destination="q6h-rs-Vuc" id="rmZ-HM-jTt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
     </scenes>
+    <classes>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="ViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="immediateAlertValueChanged:"/>
+                <relationship kind="action" name="linkLossLevelValueChanged:"/>
+                <relationship kind="action" name="notifyPhoneCallSwitchValueChanged:"/>
+                <relationship kind="action" name="scanButtonTouchUpInside:"/>
+                <relationship kind="outlet" name="AleartModeSegmentedButtons" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="BatteryPercentTextLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="BatteryProgressBar" candidateClass="UIProgressView"/>
+                <relationship kind="outlet" name="BatteryTextLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="BatteryValueTextLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="LinkLossSegmentedButtons" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="RSSIProgressBar" candidateClass="UIProgressView"/>
+                <relationship kind="outlet" name="RSSITextLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="RSSIValueTextLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="ScanActivityIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="ScanButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="SwitchStatusTextLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="SwitchTextLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="notifyByPhoneCallSwitch" candidateClass="UISwitch"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

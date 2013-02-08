@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		F834588216A77B0F005BFF23 /* KeyFobController.m in Sources */ = {isa = PBXBuildFile; fileRef = F834588116A77B0F005BFF23 /* KeyFobController.m */; };
 		F834588416A77B9C005BFF23 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F834588316A77B9C005BFF23 /* CoreBluetooth.framework */; };
+		F860806116C48C210046D7EA /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F860806016C48C210046D7EA /* AVFoundation.framework */; };
+		F860806316C52A990046D7EA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F860806216C52A990046D7EA /* AudioToolbox.framework */; };
 		F8B26A1216A520ED0056932F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B26A1116A520ED0056932F /* UIKit.framework */; };
 		F8B26A1416A520ED0056932F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B26A1316A520ED0056932F /* Foundation.framework */; };
 		F8B26A1616A520ED0056932F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B26A1516A520ED0056932F /* CoreGraphics.framework */; };
@@ -26,6 +28,8 @@
 		F834588016A77B0F005BFF23 /* KeyFobController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyFobController.h; sourceTree = "<group>"; };
 		F834588116A77B0F005BFF23 /* KeyFobController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyFobController.m; sourceTree = "<group>"; };
 		F834588316A77B9C005BFF23 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		F860806016C48C210046D7EA /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		F860806216C52A990046D7EA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		F8B26A0D16A520ED0056932F /* KeyFobSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeyFobSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8B26A1116A520ED0056932F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F8B26A1316A520ED0056932F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -49,6 +53,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F860806316C52A990046D7EA /* AudioToolbox.framework in Frameworks */,
+				F860806116C48C210046D7EA /* AVFoundation.framework in Frameworks */,
 				F834588416A77B9C005BFF23 /* CoreBluetooth.framework in Frameworks */,
 				F8B26A1216A520ED0056932F /* UIKit.framework in Frameworks */,
 				F8B26A1416A520ED0056932F /* Foundation.framework in Frameworks */,
@@ -79,6 +85,8 @@
 		F8B26A1016A520ED0056932F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F860806216C52A990046D7EA /* AudioToolbox.framework */,
+				F860806016C48C210046D7EA /* AVFoundation.framework */,
 				F834588316A77B9C005BFF23 /* CoreBluetooth.framework */,
 				F8B26A1116A520ED0056932F /* UIKit.framework */,
 				F8B26A1316A520ED0056932F /* Foundation.framework */,
@@ -220,7 +228,8 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: akihiro uehara (4YNQH4RK93)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -235,7 +244,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0A7932E3-CCAC-480A-BD41-8E629CCBF261";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -249,6 +259,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -257,6 +268,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

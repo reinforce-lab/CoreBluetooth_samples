@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KeyFobController.h"
 
 @interface ViewController : UIViewController
-
 
 @property (weak, nonatomic) IBOutlet UILabel *RSSITextLabel;
 @property (weak, nonatomic) IBOutlet UILabel *SwitchTextLabel;
@@ -24,10 +24,13 @@
 @property (weak, nonatomic) IBOutlet UIButton *ScanButton;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *AleartModeSegmentedButtons;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *LinkLossSegmentedButtons;
+@property (weak, nonatomic) IBOutlet UISwitch *notifyByPhoneCallSwitch;
 
+@property (weak, nonatomic) KeyFobController *keyfob;
 
 - (IBAction)scanButtonTouchUpInside:(id)sender;
 - (IBAction)linkLossLevelValueChanged:(id)sender;
 - (IBAction)immediateAlertValueChanged:(id)sender;
+- (IBAction)notifyPhoneCallSwitchValueChanged:(id)sender;
 
 @end
