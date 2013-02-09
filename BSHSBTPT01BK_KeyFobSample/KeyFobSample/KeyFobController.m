@@ -7,8 +7,10 @@
 //
 
 #import "KeyFobController.h"
-#import <AudioToolbox/AudioToolbox.h>
+
 #import <CoreBluetooth/CoreBluetooth.h>
+#import <CoreTelephony/CTCallCenter.h>
+#import <CoreTelephony/CTCall.h>
 
 #define kTargetDeviceName          @"BSHSBTPT01BK"
 
@@ -45,7 +47,6 @@
     CBUUID *_batteryLevelServiceUUID;
     CBUUID *_batteryLevelUUID;
     CBUUID *_batteryLevelSwitchUUID;
-
 }
 @property (nonatomic) BOOL isBTPoweredOn;
 @property (nonatomic) BOOL isScanning;
@@ -58,6 +59,8 @@
 
 @property (nonatomic) int  batteryLevel;
 @property (nonatomic) BOOL isSwitchPushed;
+
+@property (nonatomic)  CTCallCenter *callCenter;
 @end
 
 @implementation KeyFobController
@@ -73,22 +76,7 @@
 @synthesize batteryLevel;
 @synthesize isSwitchPushed;
 
-#pragma mark audio session interrupt handler
-static void audioSessionHandler(void *inClientData, UInt32 inInterruptionState) {
-    KeyFobController *ctr = (__bridge KeyFobController *)inClientData;
-
-    if(inInterruptionState == kAudioSessionBeginInterruption) {
-        NSLog(@"audio session begin interrupt.");
-        // 割り込みの開始
-        if(ctr.shouldNotifyPhoneCall) {
-            [ctr alert:HighAlert];
-        }
-    } else {
-        NSLog(@"audio session end interrupt.");
-        // 割り込みの終了
-        AudioSessionSetActive(YES);
-    }
-}
+#pragma mark Core Telephony
 
 #pragma mark Constructor
 -(id)init {
@@ -112,18 +100,24 @@ static void audioSessionHandler(void *inClientData, UInt32 inInterruptionState) 
         _batteryLevelUUID        = [CBUUID UUIDWithString:kBatteryLevelUUID];
         _batteryLevelSwitchUUID  = [CBUUID UUIDWithString:kBatteryLevelSwitchUUID];
         
-        // Setting up AudioSession to detect a phone call.
-        AudioSessionInitialize(NULL, NULL,
-                       audioSessionHandler,
-                       (__bridge void *)self);
-
-        AudioSessionSetActive(YES);
+        // Setting up CoreTelephony
+        self.callCenter = [[CTCallCenter alloc] init];
+        __weak KeyFobController *weak_self = self;
+        _callCenter.callEventHandler = ^(CTCall *inCTCall) {
+            NSString *callState = inCTCall.callState;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSLog(@"Phone call event: %@", [weak_self.callCenter.currentCalls anyObject]);
+                if(callState ==CTCallStateIncoming) {
+                    [weak_self alert:HighAlert];
+                } else {
+                    [weak_self alert:NoAlert];
+                }
+            });
+        };
     }
     return self;
 }
 -(void)dealloc {
-    AudioSessionSetActive(NO);
-    
     [self stopScanning];
     [self disconnect];
 }
@@ -399,6 +393,8 @@ static void audioSessionHandler(void *inClientData, UInt32 inInterruptionState) 
     } else if(characteristic == _batteryLevelSwitchCharacteristics) {
         [characteristic.value getBytes:&b length:1];
         self.isSwitchPushed = (b == 0x01);
+
+NSLog(@"%s, Switch state: %d",  __func__, self.isSwitchPushed );
     }
 }
 @end
