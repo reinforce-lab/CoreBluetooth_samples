@@ -169,7 +169,7 @@
     NSArray *scanServices = [NSArray arrayWithObjects:_linkLossServiceUUID, _immediateAlertServiceUUID, nil];
     // スキャンにはオプションが指定できます。いまあるオプションは、ペリフェラルを見つけた時に重複して通知するか、の指定です。
     // 近接検出など、コネクションレスでデバイスの状態を取得する用途などでは、これをYESに設定します。デフォルトでNOです。
-    NSDictionary *scanOptions = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:NO]
+    NSDictionary *scanOptions = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES]
                                                             forKey:CBCentralManagerScanOptionAllowDuplicatesKey];
     
     // デバイスのスキャン開始。iPhoneはアドバタイズメント・パケットの受信を開始します。
@@ -274,15 +274,20 @@
     
     NSString *localName = [advertisementData objectForKey:CBAdvertisementDataLocalNameKey];
     if(localName != nil && [localName isEqualToString:kTargetDeviceName] ) {
+
+        NSLog(@"Adv: %@ %@", RSSI, peripheral);
+        
         //ターゲットを発見、接続します
         //この時点でperipheralはcentral managerに保持されていません。少なくとも接続が完了するまでの間、peripheralをアプリ側で保持します。
         //接続処理はタイムアウトしません。接続に失敗すれば centralManager:didFailToConnectPeripheral:error: が呼ばれます。
         //接続処理を中止するには、peripheralを開放するか、明示的に cancelPeripheralConnection を呼び出します。
+        /*
         _peripheral = peripheral;
         [central connectPeripheral:_peripheral options:nil];
 
         // スキャンを停止します
         [self stopScanning];
+         */
     }
 }
 
@@ -393,8 +398,6 @@
     } else if(characteristic == _batteryLevelSwitchCharacteristics) {
         [characteristic.value getBytes:&b length:1];
         self.isSwitchPushed = (b == 0x01);
-
-NSLog(@"%s, Switch state: %d",  __func__, self.isSwitchPushed );
     }
 }
 @end

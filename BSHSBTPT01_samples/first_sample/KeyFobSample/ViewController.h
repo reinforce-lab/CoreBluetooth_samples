@@ -20,15 +20,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *RSSIValueTextLabel;
 @property (weak, nonatomic) IBOutlet UILabel *BatteryValueTextLabel;
 @property (weak, nonatomic) IBOutlet UILabel *BatteryPercentTextLabel;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *ScanActivityIndicator;
-@property (weak, nonatomic) IBOutlet UIButton *ScanButton;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *AleartModeSegmentedButtons;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *LinkLossSegmentedButtons;
 @property (weak, nonatomic) IBOutlet UISwitch *notifyByPhoneCallSwitch;
 
 @property (weak, nonatomic) KeyFobController *keyfob;
 
-- (IBAction)scanButtonTouchUpInside:(id)sender;
 - (IBAction)linkLossLevelValueChanged:(id)sender;
 - (IBAction)immediateAlertValueChanged:(id)sender;
 - (IBAction)notifyPhoneCallSwitchValueChanged:(id)sender;
