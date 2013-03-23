@@ -91,8 +91,12 @@
     
     PeripheralContainer *c = [_ctr.containers objectAtIndex:indexPath.row];
     cell.textLabel.text = [NSString stringWithFormat:@"%@ (RSSI:%@)", c.peripheral.name, c.RSSI];
-    cell.detailTextLabel.text = (__bridge_transfer NSString *)CFUUIDCreateString(NULL, c.peripheral.UUID);
-//    cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+    // 接続したことがないPeripheralのUUIDはnil
+    if(c.peripheral.UUID == nil) {
+        cell.detailTextLabel.text = @"(unknown)";
+    } else {
+        cell.detailTextLabel.text = (__bridge_transfer NSString *)CFUUIDCreateString(NULL, c.peripheral.UUID);
+    }
 
     return cell;
 }
