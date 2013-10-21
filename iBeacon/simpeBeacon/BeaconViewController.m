@@ -46,6 +46,11 @@
                               major:1 minor:2 identifier:kIdentifier];
     
     NSDictionary *advertisementData = [region peripheralDataWithMeasuredPower:nil];
+/* ビーコンのバイナリデータをみたいときは、これでダンプする
+    for(id key in [advertisementData allKeys]) {
+        NSLog(@"\tkey:%@ data:%@", key, [advertisementData objectForKey:key]);
+    }
+*/
     [_peripheralManager startAdvertising:advertisementData];
 }
 -(void)stopBeacon {
