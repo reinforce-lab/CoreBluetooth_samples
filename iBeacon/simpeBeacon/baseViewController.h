@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define kBeaconUUID @"D8C48660-3422-476D-A44A-D92DF37D29A0"
+#define kBeaconUUID @"88a45c17-70c5-5d2c-88b9-8173c39d6750"
 #define kIdentifier @"com.reinforce-lab"
 
 @interface baseViewController : UIViewController

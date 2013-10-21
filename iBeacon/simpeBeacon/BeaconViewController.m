@@ -43,7 +43,8 @@
 -(void)startBeacon {
     CLBeaconRegion *region = [[CLBeaconRegion alloc]
                               initWithProximityUUID:[[NSUUID alloc] initWithUUIDString:kBeaconUUID]
-                              identifier:kIdentifier];
+                              major:1 minor:2 identifier:kIdentifier];
+    
     NSDictionary *advertisementData = [region peripheralDataWithMeasuredPower:nil];
     [_peripheralManager startAdvertising:advertisementData];
 }

@@ -117,7 +117,8 @@
 #pragma mark CLLocationManagerDelegate
 - (void)locationManager:(CLLocationManager *)manager
         didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region {
-    [self writeLog:[NSString stringWithFormat:@"%s\n%@\n%@", __func__, beacons, region]];
+    id beacon = [beacons firstObject];
+    [self writeLog:[NSString stringWithFormat:@"%s\nbeacon_addr:%ld\n%@\n%@", __func__, (long int)beacon, beacons, region]];
     [self updatePanelView:beacons region:region];
 }
 - (void)locationManager:(CLLocationManager *)manager
@@ -147,5 +148,14 @@ rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
 - (void)locationManager:(CLLocationManager *)manager
 didFinishDeferredUpdatesWithError:(NSError *)error {
     [self writeLog:[NSString stringWithFormat:@"%s\n%@", __func__, error]];
+}
+- (void)locationManager:(CLLocationManager *)manager
+         didEnterRegion:(CLRegion *)region {
+    [self writeLog:[NSString stringWithFormat:@"%s\n%@", __func__, region]];
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+          didExitRegion:(CLRegion *)region {
+    [self writeLog:[NSString stringWithFormat:@"%s\n%@", __func__, region]];
 }
 @end

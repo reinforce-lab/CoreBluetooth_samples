@@ -23,6 +23,10 @@
 		F817AA8A1812290A00285605 /* BeaconViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F817AA891812290A00285605 /* BeaconViewController.m */; };
 		F817AA8E1812296900285605 /* beacon.png in Resources */ = {isa = PBXBuildFile; fileRef = F817AA8C1812296900285605 /* beacon.png */; };
 		F817AA8F1812296900285605 /* beacon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F817AA8D1812296900285605 /* beacon@2x.png */; };
+		F8376DBD1814984F00B17554 /* CentralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8376DBC1814984F00B17554 /* CentralViewController.m */; };
+		F8376DC018149A3000B17554 /* central.png in Resources */ = {isa = PBXBuildFile; fileRef = F8376DBE18149A3000B17554 /* central.png */; };
+		F8376DC118149A3000B17554 /* central@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8376DBF18149A3000B17554 /* central@2x.png */; };
+		F8376DC41814ECB600B17554 /* PassbookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8376DC31814ECB600B17554 /* PassbookViewController.m */; };
 		F889680A1813A704000CB62E /* baseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F88968091813A704000CB62E /* baseViewController.m */; };
 		F889680D1813A808000CB62E /* DetectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F889680C1813A808000CB62E /* DetectorViewController.m */; };
 		F890EB8E181398EC00C84CB4 /* detector.png in Resources */ = {isa = PBXBuildFile; fileRef = F890EB8C181398EC00C84CB4 /* detector.png */; };
@@ -61,6 +65,12 @@
 		F817AA891812290A00285605 /* BeaconViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BeaconViewController.m; sourceTree = "<group>"; };
 		F817AA8C1812296900285605 /* beacon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = beacon.png; path = simpeBeacon/beacon.png; sourceTree = "<group>"; };
 		F817AA8D1812296900285605 /* beacon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "beacon@2x.png"; path = "simpeBeacon/beacon@2x.png"; sourceTree = "<group>"; };
+		F8376DBB1814984F00B17554 /* CentralViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CentralViewController.h; sourceTree = "<group>"; };
+		F8376DBC1814984F00B17554 /* CentralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CentralViewController.m; sourceTree = "<group>"; };
+		F8376DBE18149A3000B17554 /* central.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = central.png; path = simpeBeacon/central.png; sourceTree = "<group>"; };
+		F8376DBF18149A3000B17554 /* central@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "central@2x.png"; path = "simpeBeacon/central@2x.png"; sourceTree = "<group>"; };
+		F8376DC21814ECB600B17554 /* PassbookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PassbookViewController.h; sourceTree = "<group>"; };
+		F8376DC31814ECB600B17554 /* PassbookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PassbookViewController.m; sourceTree = "<group>"; };
 		F88968081813A703000CB62E /* baseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = baseViewController.h; sourceTree = "<group>"; };
 		F88968091813A704000CB62E /* baseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = baseViewController.m; sourceTree = "<group>"; };
 		F889680B1813A808000CB62E /* DetectorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetectorViewController.h; sourceTree = "<group>"; };
@@ -134,6 +144,10 @@
 				F817AA891812290A00285605 /* BeaconViewController.m */,
 				F889680B1813A808000CB62E /* DetectorViewController.h */,
 				F889680C1813A808000CB62E /* DetectorViewController.m */,
+				F8376DBB1814984F00B17554 /* CentralViewController.h */,
+				F8376DBC1814984F00B17554 /* CentralViewController.m */,
+				F8376DC21814ECB600B17554 /* PassbookViewController.h */,
+				F8376DC31814ECB600B17554 /* PassbookViewController.m */,
 				F817AA5F181216C400285605 /* AppDelegate.h */,
 				F817AA60181216C400285605 /* AppDelegate.m */,
 				F817AA68181216C400285605 /* Images.xcassets */,
@@ -176,6 +190,8 @@
 		F817AA8B1812295C00285605 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				F8376DBE18149A3000B17554 /* central.png */,
+				F8376DBF18149A3000B17554 /* central@2x.png */,
 				F890EB8C181398EC00C84CB4 /* detector.png */,
 				F890EB8D181398EC00C84CB4 /* detector@2x.png */,
 				F817AA8C1812296900285605 /* beacon.png */,
@@ -269,11 +285,13 @@
 			files = (
 				F817AA69181216C400285605 /* Images.xcassets in Resources */,
 				F890EB8E181398EC00C84CB4 /* detector.png in Resources */,
+				F8376DC118149A3000B17554 /* central@2x.png in Resources */,
 				F817AA8E1812296900285605 /* beacon.png in Resources */,
 				F817AA5B181216C400285605 /* InfoPlist.strings in Resources */,
 				F817AA8F1812296900285605 /* beacon@2x.png in Resources */,
 				F890EB8F181398EC00C84CB4 /* detector@2x.png in Resources */,
 				F817AA64181216C400285605 /* Main.storyboard in Resources */,
+				F8376DC018149A3000B17554 /* central.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,8 +310,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8376DC41814ECB600B17554 /* PassbookViewController.m in Sources */,
 				F817AA8A1812290A00285605 /* BeaconViewController.m in Sources */,
 				F889680A1813A704000CB62E /* baseViewController.m in Sources */,
+				F8376DBD1814984F00B17554 /* CentralViewController.m in Sources */,
 				F817AA61181216C400285605 /* AppDelegate.m in Sources */,
 				F889680D1813A808000CB62E /* DetectorViewController.m in Sources */,
 				F817AA5D181216C400285605 /* main.m in Sources */,
