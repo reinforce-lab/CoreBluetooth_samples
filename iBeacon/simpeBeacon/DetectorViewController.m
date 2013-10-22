@@ -12,6 +12,7 @@
     CLLocationManager *_locationManager;
     CLBeaconRegion    *_region;
 }
+
 @property (weak, nonatomic) IBOutlet UIView *rangePanelView;
 @property (weak, nonatomic) IBOutlet UILabel *rangeUUIDTextLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rangeMinorTextLabel;
@@ -19,7 +20,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *rangeProxTextLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rangeAccuracyTextLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rangeRssiTextLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *regionSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *rangingSwitch;
+@property (weak, nonatomic) IBOutlet UILabel *inRegionTextLabel;
+@property (weak, nonatomic) IBOutlet UILabel *inRegionStatusTextLabel;
 @end
 
 @implementation DetectorViewController
@@ -38,6 +42,11 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    // CLBeaconRegionを作成
+    _region = [[CLBeaconRegion alloc]
+               initWithProximityUUID:[[NSUUID alloc] initWithUUIDString:kBeaconUUID]
+               identifier:kIdentifier];
+    
     // iBeaconを受信するlocationManagerを組み立てます
     _locationManager = [[CLLocationManager alloc] init];
     _locationManager.delegate = self;
@@ -52,18 +61,14 @@
 #pragma mark Private methods
 // ビーコンの受信をOn/Offします
 -(void)startReceivingBeacon {
-    if(_region == nil) {
-        _region = [[CLBeaconRegion alloc]
-                   initWithProximityUUID:[[NSUUID alloc] initWithUUIDString:kBeaconUUID]
-                   identifier:kIdentifier];
-        [_locationManager startRangingBeaconsInRegion:_region];
-    }
+    // 距離計測を開始
+
+    // Beaconによる領域観測を開始
+    [_locationManager startMonitoringForRegion:_region];
 }
 -(void)stopReceivingBeacon {
-    if(_region != nil) {
-        [_locationManager stopRangingBeaconsInRegion:_region];
-        _region = nil;
-    }
+
+
 }
 -(void)updatePanelView:(NSArray *)beacons region:(CLBeaconRegion *)region {
     CLBeacon *beacon = [beacons firstObject];
@@ -109,10 +114,31 @@
     }
     
     if(self.rangingSwitch.on) {
-        [self startReceivingBeacon];
+        [_locationManager startRangingBeaconsInRegion:_region];
     } else {
-        [self stopReceivingBeacon];
+        [_locationManager stopRangingBeaconsInRegion:_region];
     }
+}
+- (IBAction)regionSwitchValueChanged:(id)sender {
+    // iBeaconのリージョンモニタリングに対応しているかを調べます。
+    if(![CLLocationManager isMonitoringAvailableForClass:[CLBeaconRegion class]]) {
+        [self showAleart:@"iBeaconのリージョンモニタリング機能がありません。"];
+        self.regionSwitch.on = NO;
+        return;
+    }
+    
+    if(self.regionSwitch.on) {
+        [_locationManager startMonitoringForRegion:_region];
+
+        self.inRegionTextLabel.alpha = 1.0;
+        self.inRegionStatusTextLabel.alpha = 1.0;
+    } else {
+        [_locationManager stopMonitoringForRegion:_region];
+        
+        self.inRegionTextLabel.alpha = 0.5;
+        self.inRegionStatusTextLabel.alpha = 0.5;
+    }
+    
 }
 #pragma mark CLLocationManagerDelegate
 - (void)locationManager:(CLLocationManager *)manager
@@ -139,6 +165,19 @@ rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
         return;
     }
 }
+- (void)locationManager:(CLLocationManager *)manager
+         didEnterRegion:(CLRegion *)region {
+    [self writeLog:[NSString stringWithFormat:@"%s\n%@", __func__, region]];
+    
+    self.inRegionStatusTextLabel.text = @"YES";
+}
+- (void)locationManager:(CLLocationManager *)manager
+          didExitRegion:(CLRegion *)region {
+    [self writeLog:[NSString stringWithFormat:@"%s\n%@", __func__, region]];
+    
+    self.inRegionStatusTextLabel.text = @"NO";
+}
+
 - (void)locationManagerDidPauseLocationUpdates:(CLLocationManager *)manager {
     [self writeLog:[NSString stringWithFormat:@"%s", __func__]];
 }
@@ -149,13 +188,5 @@ rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
 didFinishDeferredUpdatesWithError:(NSError *)error {
     [self writeLog:[NSString stringWithFormat:@"%s\n%@", __func__, error]];
 }
-- (void)locationManager:(CLLocationManager *)manager
-         didEnterRegion:(CLRegion *)region {
-    [self writeLog:[NSString stringWithFormat:@"%s\n%@", __func__, region]];
-}
 
-- (void)locationManager:(CLLocationManager *)manager
-          didExitRegion:(CLRegion *)region {
-    [self writeLog:[NSString stringWithFormat:@"%s\n%@", __func__, region]];
-}
 @end
