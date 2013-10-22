@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-#define kBeaconUUID @"88a45c17-70c5-5d2c-88b9-8173c39d6750"
-#define kIdentifier @"com.reinforce-lab"
+#define kBeaconUUID  @"88a45c17-70c5-5d2c-88b9-8173c39d6750"
+#define kIdentifier  @"com.reinforce-lab"
+#define kPassBookURL @"https://pass.is/1B7fvaX1VrrZMqn"
 
 @interface baseViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel *uuidTextLabel;

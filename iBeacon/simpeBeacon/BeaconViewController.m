@@ -74,6 +74,9 @@
         [self stopBeacon];
     }
 }
+- (IBAction)passButtonTouchUpInside:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kPassBookURL]];
+}
 
 #pragma mark CBPeripheralManagerDelegate
 - (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral {
