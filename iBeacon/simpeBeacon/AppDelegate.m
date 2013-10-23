@@ -12,6 +12,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // --- NSLognの出力先をDocuments/log.txtに設定する ---
+    // パス（Documents/log.txt）の文字列を作成する
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                         NSUserDomainMask,
+                                                         YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *path = [documentsDirectory stringByAppendingPathComponent:@"log.txt"];
+    
+    // freopen関数で標準エラー出力をファイルに保存する
+    freopen([path cStringUsingEncoding:NSASCIIStringEncoding], "a+", stderr);
+    
     NSLog(@"%s", __func__);
     // Override point for customization after application launch.
     return YES;
