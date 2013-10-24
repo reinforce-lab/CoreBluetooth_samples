@@ -125,6 +125,10 @@
         [self showAleart:@"iBeaconのリージョンモニタリング機能がありません。"];
         self.regionSwitch.on = NO;
         return;
+    } else if([CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
+        [self writeLog:@"ローケーションサービスを使う権限がありません。"];
+        self.rangingSwitch.on = NO;
+        return;
     }
     
     if(self.regionSwitch.on) {
@@ -161,7 +165,16 @@ rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
     
     if ([CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
         [self writeLog:@"ローケーションサービスを使う権限がありません。"];
-        self.rangingSwitch.on = NO;
+        
+        if(self.regionSwitch.on) {
+            [_locationManager stopMonitoringForRegion:_region];
+            self.regionSwitch.on = NO;
+        }
+        if(self.rangingSwitch.on) {
+            [_locationManager stopRangingBeaconsInRegion:_region];
+            self.rangingSwitch.on = NO;
+        }
+
         return;
     }
 }
