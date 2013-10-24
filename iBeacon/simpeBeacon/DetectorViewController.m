@@ -13,7 +13,9 @@
     CLBeaconRegion    *_region;
     
     bool _isRegionUpperLimit;
+    bool _isRangingUpperLimit;
     NSMutableArray *_regions;
+    NSMutableArray *_rangings;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *rangePanelView;
@@ -48,6 +50,9 @@
     _isRegionUpperLimit = NO;
     _regions = [NSMutableArray array];
     
+    _isRangingUpperLimit = NO;
+    _rangings = [NSMutableArray array];
+    
     // CLBeaconRegionを作成
     _region = [[CLBeaconRegion alloc]
                initWithProximityUUID:[[NSUUID alloc] initWithUUIDString:kBeaconUUID]
@@ -78,15 +83,15 @@
     if(beacon == nil) {
         self.rangePanelView.alpha = 0.2;
         /*
-        self.rangeUUIDTextLabel.text  = @"";
-        self.rangeMajorTextLabel.text = @"";
-        self.rangeMinorTextLabel.text = @"";
-        self.rangeProxTextLabel.text  = @"";
+         self.rangeUUIDTextLabel.text  = @"";
+         self.rangeMajorTextLabel.text = @"";
+         self.rangeMinorTextLabel.text = @"";
+         self.rangeProxTextLabel.text  = @"";
          */
     } else {
-
+        
         self.rangePanelView.alpha = 1.0;
-
+        
         self.rangeUUIDTextLabel.text  = [NSString stringWithFormat:@"%@", beacon.proximityUUID.UUIDString];
         self.rangeMajorTextLabel.text = [NSString stringWithFormat:@"%@", beacon.major];
         self.rangeMinorTextLabel.text = [NSString stringWithFormat:@"%@", beacon.minor];
@@ -106,27 +111,44 @@
     }
 }
 -(void)testRegionUpperLimit {
-    if(! _isRegionUpperLimit) {
-        dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if(! _isRegionUpperLimit) {
             NSUUID *uuid = [NSUUID UUID];
-            CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:[uuid UUIDString]];
+            CLBeaconRegion *region = [[CLBeaconRegion alloc]
+                                      initWithProximityUUID:uuid
+                                      identifier:[NSString stringWithFormat:@"com.rein.%d", [_regions count]]];
             [_regions addObject:region];
             [_locationManager startMonitoringForRegion:region];
             
-            [self writeLog:[NSString stringWithFormat:@"登録開始: %d", [_regions count]]];
+            double delayInSeconds = 0.3;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [self testRegionUpperLimit];
+            });
+        }
+    });
+}
+-(void)testRangingUpperLimit {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if(! _isRangingUpperLimit ) {
+            NSUUID *uuid = [NSUUID UUID];
             
-//            if([_regions count] < 1000) {
-                // 遅延再帰呼び出し
-                double delayInSeconds = 0.01;
-                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                    [self testRegionUpperLimit];
-                });
-//            } else {
-//                [self writeLog:[NSString stringWithFormat:@"登録停止: %d", [_regions count]]];
-//            }
-        });
-    }
+            CLBeaconRegion *region = [[CLBeaconRegion alloc]
+                                      initWithProximityUUID:uuid
+                                      major:1 minor:[_rangings count]
+                                      identifier:[NSString stringWithFormat:@"com.rein.%d", [_rangings count]]];
+            [_rangings addObject:region];
+            [_locationManager startRangingBeaconsInRegion:region];
+            
+            [self writeLog:[NSString stringWithFormat:@"登録: %d", [_rangings count]]];
+            
+            double delayInSeconds = 0.01;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [self testRangingUpperLimit];
+            });
+        }
+    });
 }
 #pragma mark Event handlers
 - (IBAction)rangingSwitchValueChanged:(id)sender {
@@ -140,6 +162,8 @@
     
     if(self.rangingSwitch.on) {
         [_locationManager startRangingBeaconsInRegion:_region];
+        // レンジング登録上限を調べる
+//        [self testRangingUpperLimit];
     } else {
         [_locationManager stopRangingBeaconsInRegion:_region];
     }
@@ -150,20 +174,22 @@
         [self showAleart:@"iBeaconのリージョンモニタリング機能がありません。"];
         self.regionSwitch.on = NO;
         return;
-    } else if([CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
-        [self writeLog:@"ローケーションサービスを使う権限がありません。"];
-        self.rangingSwitch.on = NO;
-        return;
     }
+    /* TBD ユーザに権限を求めるだけのダイアログの表示?
+     else if([CLLocationManager authorizationStatus] != kCLAuthorizationStatusAuthorized) {
+     [self writeLog:@"ローケーションサービスを使う権限がありません。"];
+     self.rangingSwitch.on = NO;
+     return;
+     }*/
     
     if(self.regionSwitch.on) {
         [_locationManager startMonitoringForRegion:_region];
-
+        
         self.inRegionTextLabel.alpha = 1.0;
         self.inRegionStatusTextLabel.alpha = 1.0;
         
         //リージョンの登録上限値を調べるテストコード
-//        [self testRegionUpperLimit];
+        //        [self testRegionUpperLimit];
     } else {
         [_locationManager stopMonitoringForRegion:_region];
         
@@ -183,11 +209,13 @@
 rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
               withError:(NSError *)error {
     [self writeLog:[NSString stringWithFormat:@"%s\n%@\n%@", __func__, region, error]];
+    
+    _isRangingUpperLimit = YES;
+    [self writeLog:[NSString stringWithFormat:@"上限: %d", [_rangings count]]];
 }
 - (void)locationManager:(CLLocationManager *)manager
 monitoringDidFailForRegion:(CLRegion *)region
               withError:(NSError *)error {
-
     [self writeLog:[NSString stringWithFormat:@"%s\n%@\n%@", __func__, region, error]];
     
     // 領域の登録に失敗
@@ -215,7 +243,7 @@ monitoringDidFailForRegion:(CLRegion *)region
             [_locationManager stopRangingBeaconsInRegion:_region];
             self.rangingSwitch.on = NO;
         }
-
+        
         return;
     }
 }
