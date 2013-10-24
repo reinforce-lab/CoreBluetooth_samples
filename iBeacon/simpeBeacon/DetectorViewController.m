@@ -11,6 +11,9 @@
 @interface DetectorViewController ()  {
     CLLocationManager *_locationManager;
     CLBeaconRegion    *_region;
+    
+    bool _isRegionUpperLimit;
+    NSMutableArray *_regions;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *rangePanelView;
@@ -41,6 +44,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    _isRegionUpperLimit = NO;
+    _regions = [NSMutableArray array];
     
     // CLBeaconRegionを作成
     _region = [[CLBeaconRegion alloc]
@@ -99,6 +105,29 @@
         self.rangeProxTextLabel.text =proximity;
     }
 }
+-(void)testRegionUpperLimit {
+    if(! _isRegionUpperLimit) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSUUID *uuid = [NSUUID UUID];
+            CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:uuid identifier:[uuid UUIDString]];
+            [_regions addObject:region];
+            [_locationManager startMonitoringForRegion:region];
+            
+            [self writeLog:[NSString stringWithFormat:@"登録開始: %d", [_regions count]]];
+            
+//            if([_regions count] < 1000) {
+                // 遅延再帰呼び出し
+                double delayInSeconds = 0.01;
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                    [self testRegionUpperLimit];
+                });
+//            } else {
+//                [self writeLog:[NSString stringWithFormat:@"登録停止: %d", [_regions count]]];
+//            }
+        });
+    }
+}
 #pragma mark Event handlers
 - (IBAction)rangingSwitchValueChanged:(id)sender {
     // iBeaconに対応しているかを調べます。
@@ -132,6 +161,9 @@
 
         self.inRegionTextLabel.alpha = 1.0;
         self.inRegionStatusTextLabel.alpha = 1.0;
+        
+        //リージョンの登録上限値を調べるテストコード
+//        [self testRegionUpperLimit];
     } else {
         [_locationManager stopMonitoringForRegion:_region];
         
@@ -151,6 +183,14 @@
 rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
               withError:(NSError *)error {
     [self writeLog:[NSString stringWithFormat:@"%s\n%@\n%@", __func__, region, error]];
+    
+    // 領域の登録に失敗
+/*
+    if(error.code == kCLErrorRegionMonitoringFailure) {
+        _isRegionUpperLimit = YES;
+        [self writeLog:[NSString stringWithFormat:@"上限: %d", [_regions count]]];
+    }
+*/ 
 }
 - (void)locationManager:(CLLocationManager *)manager
        didFailWithError:(NSError *)error {
