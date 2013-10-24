@@ -96,7 +96,7 @@
         self.rangeMajorTextLabel.text = [NSString stringWithFormat:@"%@", beacon.major];
         self.rangeMinorTextLabel.text = [NSString stringWithFormat:@"%@", beacon.minor];
         self.rangeAccuracyTextLabel.text = [NSString stringWithFormat:@"%1.1e", beacon.accuracy];
-        self.rangeRssiTextLabel.text =[NSString stringWithFormat:@"%d", beacon.rssi];
+        self.rangeRssiTextLabel.text =[NSString stringWithFormat:@"%ld", (long)beacon.rssi];
         
         NSString *proximity = @"";
         switch (beacon.proximity) {
@@ -116,9 +116,13 @@
             NSUUID *uuid = [NSUUID UUID];
             CLBeaconRegion *region = [[CLBeaconRegion alloc]
                                       initWithProximityUUID:uuid
-                                      identifier:[NSString stringWithFormat:@"com.rein.%d", [_regions count]]];
+                                      identifier:[NSString stringWithFormat:@"com.rein.%lu", (unsigned long)[_regions count]]];
             [_regions addObject:region];
             [_locationManager startMonitoringForRegion:region];
+            
+            [self writeLog:[NSString stringWithFormat:@"登録(%@): %lu",uuid, (unsigned long)[_regions count]]];
+            
+if([_regions count] > 20) return;
             
             double delayInSeconds = 0.3;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
@@ -136,11 +140,11 @@
             CLBeaconRegion *region = [[CLBeaconRegion alloc]
                                       initWithProximityUUID:uuid
                                       major:1 minor:[_rangings count]
-                                      identifier:[NSString stringWithFormat:@"com.rein.%d", [_rangings count]]];
+                                      identifier:[NSString stringWithFormat:@"com.rein.%lu", (unsigned long)[_rangings count]]];
             [_rangings addObject:region];
             [_locationManager startRangingBeaconsInRegion:region];
             
-            [self writeLog:[NSString stringWithFormat:@"登録: %d", [_rangings count]]];
+            [self writeLog:[NSString stringWithFormat:@"登録: %lu",(unsigned long)[_rangings count]]];
             
             double delayInSeconds = 0.01;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
@@ -189,7 +193,7 @@
         self.inRegionStatusTextLabel.alpha = 1.0;
         
         //リージョンの登録上限値を調べるテストコード
-        //        [self testRegionUpperLimit];
+//        [self testRegionUpperLimit];
     } else {
         [_locationManager stopMonitoringForRegion:_region];
         
@@ -211,7 +215,7 @@ rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
     [self writeLog:[NSString stringWithFormat:@"%s\n%@\n%@", __func__, region, error]];
     
     _isRangingUpperLimit = YES;
-    [self writeLog:[NSString stringWithFormat:@"上限: %d", [_rangings count]]];
+    [self writeLog:[NSString stringWithFormat:@"上限: %lu",(unsigned long)[_rangings count]]];
 }
 - (void)locationManager:(CLLocationManager *)manager
 monitoringDidFailForRegion:(CLRegion *)region
@@ -221,7 +225,7 @@ monitoringDidFailForRegion:(CLRegion *)region
     // 領域の登録に失敗
     if(error.code == kCLErrorRegionMonitoringFailure) {
         _isRegionUpperLimit = YES;
-        [self writeLog:[NSString stringWithFormat:@"上限: %d", [_regions count]]];
+        [self writeLog:[NSString stringWithFormat:@"上限: %lu", (unsigned long) [_regions count]]];
     }
 }
 
