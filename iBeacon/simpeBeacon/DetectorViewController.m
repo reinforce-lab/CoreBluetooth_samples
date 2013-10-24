@@ -66,17 +66,6 @@
 }
 
 #pragma mark Private methods
-// ビーコンの受信をOn/Offします
--(void)startReceivingBeacon {
-    // 距離計測を開始
-
-    // Beaconによる領域観測を開始
-    [_locationManager startMonitoringForRegion:_region];
-}
--(void)stopReceivingBeacon {
-
-
-}
 -(void)updatePanelView:(NSArray *)beacons region:(CLBeaconRegion *)region {
     CLBeacon *beacon = [beacons firstObject];
     
