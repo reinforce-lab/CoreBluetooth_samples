@@ -183,15 +183,20 @@
 rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region
               withError:(NSError *)error {
     [self writeLog:[NSString stringWithFormat:@"%s\n%@\n%@", __func__, region, error]];
+}
+- (void)locationManager:(CLLocationManager *)manager
+monitoringDidFailForRegion:(CLRegion *)region
+              withError:(NSError *)error {
+
+    [self writeLog:[NSString stringWithFormat:@"%s\n%@\n%@", __func__, region, error]];
     
     // 領域の登録に失敗
-/*
     if(error.code == kCLErrorRegionMonitoringFailure) {
         _isRegionUpperLimit = YES;
         [self writeLog:[NSString stringWithFormat:@"上限: %d", [_regions count]]];
     }
-*/ 
 }
+
 - (void)locationManager:(CLLocationManager *)manager
        didFailWithError:(NSError *)error {
     [self writeLog:[NSString stringWithFormat:@"%s\n%@", __func__, error]];
