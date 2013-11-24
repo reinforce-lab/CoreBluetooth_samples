@@ -57,6 +57,11 @@
     _region = [[CLBeaconRegion alloc]
                initWithProximityUUID:[[NSUUID alloc] initWithUUIDString:kBeaconUUID]
                identifier:kIdentifier];
+
+    // 画面表示時に領域チェックする場合は、この設定を使います。結果は、locationManager:didDetermineState:forRegion:で返ってきます。
+//    _region.notifyEntryStateOnDisplay = YES;
+//    _region.notifyOnEntry = NO;
+//    _region.notifyOnExit  = NO;
     
     // iBeaconを受信するlocationManagerを組み立てます
     _locationManager = [[CLLocationManager alloc] init];
@@ -116,13 +121,13 @@
             NSUUID *uuid = [NSUUID UUID];
             CLBeaconRegion *region = [[CLBeaconRegion alloc]
                                       initWithProximityUUID:uuid
-                                      identifier:[NSString stringWithFormat:@"com.rein.%lu", (unsigned long)[_regions count]]];
+                                      identifier:[NSString stringWithFormat:@"com.rein.%d", (int)[_regions count]]];
             [_regions addObject:region];
             [_locationManager startMonitoringForRegion:region];
             
-            [self writeLog:[NSString stringWithFormat:@"登録(%@): %lu",uuid, (unsigned long)[_regions count]]];
+            [self writeLog:[NSString stringWithFormat:@"登録(%@): %d",uuid, (int)[_regions count]]];
             
-if([_regions count] > 20) return;
+if([_regions count] > 10) return;
             
             double delayInSeconds = 0.3;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
@@ -188,6 +193,8 @@ if([_regions count] > 20) return;
     
     if(self.regionSwitch.on) {
         [_locationManager startMonitoringForRegion:_region];
+
+        [_locationManager requestStateForRegion:_region];
         
         self.inRegionTextLabel.alpha = 1.0;
         self.inRegionStatusTextLabel.alpha = 1.0;
@@ -250,6 +257,9 @@ monitoringDidFailForRegion:(CLRegion *)region
         
         return;
     }
+}
+-(void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region {
+    [self writeLog:[NSString stringWithFormat:@"%s\nstate:%d %@", __func__, (int)state, region]];
 }
 - (void)locationManager:(CLLocationManager *)manager
          didEnterRegion:(CLRegion *)region {

@@ -237,17 +237,18 @@ static NSString * const kDataSourceCharUUID = @"22EAC6E9-24D6-4BB5-BE44-B36ACE7C
 }
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
     NSLog(@"%s %@", __PRETTY_FUNCTION__, characteristic);
-    
+    [self dumpNotificationSource:characteristic.value];
+    /*
     if([characteristic.UUID.data isEqualToData:_notificationSOurceCharUUID.data]) {
-        [self dumpNotificationSource:characteristic.value];
-    }
+
+    }*/
 }
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
     NSLog(@"%s %@", __PRETTY_FUNCTION__, characteristic);
     
 }
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, characteristic);
-    
+    NSLog(@"%s %@ value:%@", __PRETTY_FUNCTION__, characteristic, characteristic.value);
+    [self dumpNotificationSource:characteristic.value];
 }
 @end

@@ -92,10 +92,10 @@
     PeripheralContainer *c = [_ctr.containers objectAtIndex:indexPath.row];
     cell.textLabel.text = [NSString stringWithFormat:@"%@ (RSSI:%@)", c.peripheral.name, c.RSSI];
     // 接続したことがないPeripheralのUUIDはnil
-    if(c.peripheral.identifier == nil) {
+    if(c.peripheral.UUID == nil) {
         cell.detailTextLabel.text = @"(unknown)";
     } else {
-        cell.detailTextLabel.text =c.peripheral.identifier.UUIDString;
+        cell.detailTextLabel.text = (__bridge_transfer NSString *)CFUUIDCreateString(NULL, c.peripheral.UUID);
     }
 
     return cell;

@@ -26,12 +26,11 @@
 	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>location</string>
+		<string>audio</string>
+		<string>bluetooth-central</string>
 	</array>
-	<key>UIFileSharingEnabled</key>
-	<true/>
 	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
+	<string>MainStoryboard</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

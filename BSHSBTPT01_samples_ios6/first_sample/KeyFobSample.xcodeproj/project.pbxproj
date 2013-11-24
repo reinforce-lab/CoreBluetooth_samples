@@ -288,7 +288,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KeyFobSample/KeyFobSample-Prefix.pch";
 				INFOPLIST_FILE = "KeyFobSample/KeyFobSample-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "../../BLEplug/**";
 				WRAPPER_EXTENSION = app;
@@ -301,7 +300,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KeyFobSample/KeyFobSample-Prefix.pch";
 				INFOPLIST_FILE = "KeyFobSample/KeyFobSample-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "../../BLEplug/**";
 				WRAPPER_EXTENSION = app;

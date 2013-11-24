@@ -7,11 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F81599B116FA8CA50084E5A5 /* DeviceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F81599B016FA8CA50084E5A5 /* DeviceListViewController.m */; };
 		F834588216A77B0F005BFF23 /* KeyFobController.m in Sources */ = {isa = PBXBuildFile; fileRef = F834588116A77B0F005BFF23 /* KeyFobController.m */; };
 		F834588416A77B9C005BFF23 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F834588316A77B9C005BFF23 /* CoreBluetooth.framework */; };
 		F860806516C5E50D0046D7EA /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F860806416C5E50D0046D7EA /* CoreTelephony.framework */; };
-		F8B070A816FB020200DE7003 /* PeripheralContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B070A716FB020200DE7003 /* PeripheralContainer.m */; };
 		F8B26A1216A520ED0056932F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B26A1116A520ED0056932F /* UIKit.framework */; };
 		F8B26A1416A520ED0056932F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B26A1316A520ED0056932F /* Foundation.framework */; };
 		F8B26A1616A520ED0056932F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B26A1516A520ED0056932F /* CoreGraphics.framework */; };
@@ -26,14 +24,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F81599AF16FA8CA50084E5A5 /* DeviceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceListViewController.h; sourceTree = "<group>"; };
-		F81599B016FA8CA50084E5A5 /* DeviceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceListViewController.m; sourceTree = "<group>"; };
 		F834588016A77B0F005BFF23 /* KeyFobController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyFobController.h; sourceTree = "<group>"; };
 		F834588116A77B0F005BFF23 /* KeyFobController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyFobController.m; sourceTree = "<group>"; };
 		F834588316A77B9C005BFF23 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		F860806416C5E50D0046D7EA /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
-		F8B070A616FB020200DE7003 /* PeripheralContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeripheralContainer.h; sourceTree = "<group>"; };
-		F8B070A716FB020200DE7003 /* PeripheralContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeripheralContainer.m; sourceTree = "<group>"; };
 		F8B26A0D16A520ED0056932F /* KeyFobSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeyFobSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8B26A1116A520ED0056932F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F8B26A1316A520ED0056932F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -88,8 +82,8 @@
 		F8B26A1016A520ED0056932F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F834588316A77B9C005BFF23 /* CoreBluetooth.framework */,
 				F860806416C5E50D0046D7EA /* CoreTelephony.framework */,
+				F834588316A77B9C005BFF23 /* CoreBluetooth.framework */,
 				F8B26A1116A520ED0056932F /* UIKit.framework */,
 				F8B26A1316A520ED0056932F /* Foundation.framework */,
 				F8B26A1516A520ED0056932F /* CoreGraphics.framework */,
@@ -100,8 +94,6 @@
 		F8B26A1716A520ED0056932F /* KeyFobSample */ = {
 			isa = PBXGroup;
 			children = (
-				F8B070A616FB020200DE7003 /* PeripheralContainer.h */,
-				F8B070A716FB020200DE7003 /* PeripheralContainer.m */,
 				F834588016A77B0F005BFF23 /* KeyFobController.h */,
 				F834588116A77B0F005BFF23 /* KeyFobController.m */,
 				F8B26A2016A520ED0056932F /* AppDelegate.h */,
@@ -109,8 +101,6 @@
 				F8B26A2916A520ED0056932F /* MainStoryboard.storyboard */,
 				F8B26A2C16A520ED0056932F /* ViewController.h */,
 				F8B26A2D16A520ED0056932F /* ViewController.m */,
-				F81599AF16FA8CA50084E5A5 /* DeviceListViewController.h */,
-				F81599B016FA8CA50084E5A5 /* DeviceListViewController.m */,
 				F8B26A1816A520ED0056932F /* Supporting Files */,
 			);
 			path = KeyFobSample;
@@ -200,8 +190,6 @@
 				F8B26A2216A520ED0056932F /* AppDelegate.m in Sources */,
 				F8B26A2E16A520ED0056932F /* ViewController.m in Sources */,
 				F834588216A77B0F005BFF23 /* KeyFobController.m in Sources */,
-				F81599B116FA8CA50084E5A5 /* DeviceListViewController.m in Sources */,
-				F8B070A816FB020200DE7003 /* PeripheralContainer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,7 +276,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KeyFobSample/KeyFobSample-Prefix.pch";
 				INFOPLIST_FILE = "KeyFobSample/KeyFobSample-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "../../BLEplug/**";
 				WRAPPER_EXTENSION = app;
@@ -301,7 +288,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KeyFobSample/KeyFobSample-Prefix.pch";
 				INFOPLIST_FILE = "KeyFobSample/KeyFobSample-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "../../BLEplug/**";
 				WRAPPER_EXTENSION = app;

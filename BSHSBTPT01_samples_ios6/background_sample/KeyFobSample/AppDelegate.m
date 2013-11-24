@@ -1,9 +1,9 @@
 //
 //  AppDelegate.m
-//  simpeBeacon
+//  KeyFobSample
 //
-//  Created by uehara akihiro on 2013/10/19.
-//  Copyright (c) 2013年 REINFORCE Lab. All rights reserved.
+//  Created by akihiro uehara on 2013/01/15.
+//  Copyright (c) 2013年 wa-fu-u, LLC. All rights reserved.
 //
 
 #import "AppDelegate.h"
@@ -12,52 +12,39 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // --- NSLognの出力先をDocuments/log.txtに設定する ---
-    // パス（Documents/log.txt）の文字列を作成する
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
-                                                         NSUserDomainMask,
-                                                         YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *path = [documentsDirectory stringByAppendingPathComponent:@"log.txt"];
-    
-    // freopen関数で標準エラー出力をファイルに保存する
-    freopen([path cStringUsingEncoding:NSASCIIStringEncoding], "a+", stderr);
-    
-    NSLog(@"%s options:%@", __func__, launchOptions);
     // Override point for customization after application launch.
+    self.keyfob = [[KeyFobController alloc] init];
     return YES;
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
 {
+        NSLog(@"%s", __func__);
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-    NSLog(@"%s", __func__);
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+    NSLog(@"%s", __func__);
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    NSLog(@"%s", __func__);
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    NSLog(@"%s", __func__);
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    NSLog(@"%s", __func__);
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
+    self.keyfob = nil;
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    NSLog(@"%s", __func__);
 }
 
 @end
