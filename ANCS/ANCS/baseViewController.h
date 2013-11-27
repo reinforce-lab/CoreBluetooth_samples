@@ -15,5 +15,6 @@
 - (IBAction)clearButtonTouchUpInside:(id)sender;
 
 -(void)writeLog:(NSString *)log;
+-(void)clearLog;
 -(void)showAleart:(NSString *)message;
 @end

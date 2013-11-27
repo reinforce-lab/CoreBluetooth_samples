@@ -60,6 +60,9 @@ static NSString * const kDataSourceCharUUID = @"22EAC6E9-24D6-4BB5-BE44-B36ACE7C
     NSString *version = [[UIDevice currentDevice] systemVersion];
     if([version hasPrefix:@"6" ]) {
         _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+    } else {
+        self.connectButton.enabled = NO;
+        self.activityIndicator.hidden = YES;
     }
 }
 #pragma mark Event handler
@@ -74,13 +77,13 @@ static NSString * const kDataSourceCharUUID = @"22EAC6E9-24D6-4BB5-BE44-B36ACE7C
         }
     } else {
         if(self.activityIndicator.hidden) {
-            NSLog(@"Start scanning...");
+            [self writeLog:@"Start scanning..."];
             self.activityIndicator.hidden = NO;
             [self.activityIndicator startAnimating];
             [_centralManager scanForPeripheralsWithServices:nil options:nil];
 //            [_centralManager retrieveConnectedPeripheralsWithServices:@[_ancsServiceUUID]];
         } else {
-            NSLog(@"Cancel scanning...");
+            [self writeLog:@"Cancel scanning..."];
             self.activityIndicator.hidden = YES;
             [_centralManager stopScan];
         }
@@ -92,7 +95,7 @@ static NSString * const kDataSourceCharUUID = @"22EAC6E9-24D6-4BB5-BE44-B36ACE7C
 // 起動時に電源On/Off、BLEが使えるかが通知されるので、アプリ側はこれを見て動かす
 // Bluetoothの電源On/Offが変更されたら、ここに通知される
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    [self writeLog:[NSString stringWithFormat:@"%s", __PRETTY_FUNCTION__]];
     
     if(_centralManager.state == CBCentralManagerStatePoweredOn) {
         self.connectButton.enabled = YES;
@@ -109,19 +112,19 @@ static NSString * const kDataSourceCharUUID = @"22EAC6E9-24D6-4BB5-BE44-B36ACE7C
 
 // optional
 - (void)centralManager:(CBCentralManager *)central didRetrieveConnectedPeripherals:(NSArray *)peripherals {
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, peripherals);
+    [self writeLog:[NSString stringWithFormat:@"%s %@", __PRETTY_FUNCTION__, peripherals]];
     
     _peripheral = [peripherals firstObject];
     [_peripheral discoverServices:@[_ancsServiceUUID]];
 }
 - (void)centralManager:(CBCentralManager *)central didRetrievePeripherals:(NSArray *)peripherals {
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, peripherals);
+    [self writeLog:[NSString stringWithFormat:@"%s %@", __PRETTY_FUNCTION__, peripherals]];
     
     _peripheral = [peripherals firstObject];
     [_centralManager connectPeripheral:_peripheral options:nil];
 }
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI {
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, peripheral);
+    [self writeLog:[NSString stringWithFormat:@"%s %@", __PRETTY_FUNCTION__, peripheral]];
     
     
     NSString *localName = [advertisementData objectForKey:CBAdvertisementDataLocalNameKey];
@@ -132,13 +135,13 @@ static NSString * const kDataSourceCharUUID = @"22EAC6E9-24D6-4BB5-BE44-B36ACE7C
     }
 }
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral {
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, peripheral);
+    [self writeLog:[NSString stringWithFormat:@"%s %@", __PRETTY_FUNCTION__, peripheral]];
     
     _peripheral.delegate = self;
     [_peripheral discoverServices:@[_ancsServiceUUID]];
 }
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, peripheral);
+    [self writeLog:[NSString stringWithFormat:@"%s %@", __PRETTY_FUNCTION__, peripheral]];
     
     self.activityIndicator.hidden = YES;
     self.connectButton.enabled  = YES;
@@ -146,7 +149,7 @@ static NSString * const kDataSourceCharUUID = @"22EAC6E9-24D6-4BB5-BE44-B36ACE7C
     _peripheral = nil;
 }
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, peripheral);
+    [self writeLog:[NSString stringWithFormat:@"%s %@", __PRETTY_FUNCTION__, peripheral]];
     
     self.activityIndicator.hidden = YES;
     self.connectButton.enabled    = YES;
@@ -200,21 +203,21 @@ static NSString * const kDataSourceCharUUID = @"22EAC6E9-24D6-4BB5-BE44-B36ACE7C
 }
 -(void)dumpNotificationSource:(NSData *)data {
     if([data length] != 8) {
-        NSLog(@"Invalid data length: %d expected:8", [data length]);
+        [self writeLog:[NSString stringWithFormat:@"Invalid data length: %d expected:8", [data length]]];
     } else {
         uint8_t buf[8];
         [data getBytes:buf];
-        NSLog(@"EventID:%@ EventFlags:%@ CtegoryID:%@ CategoryCount:%d",
+        [self writeLog:[NSString stringWithFormat:@"EventID:%@ EventFlags:%@ CtegoryID:%@ CategoryCount:%d",
               [self eventIDToString:buf[0]],
               [self eventFlagToString:buf[1]],
               [self categoryIDToString:buf[2]],
-              buf[3]);
+              buf[3]]];
     }
 }
 
 #pragma mark CBPeripheralDelegate
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error {
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, error);
+    [self writeLog:[NSString stringWithFormat:@"%s %@", __PRETTY_FUNCTION__, error]];
     
     [_peripheral
      discoverCharacteristics:@[_notificationSOurceCharUUID,
@@ -223,7 +226,7 @@ static NSString * const kDataSourceCharUUID = @"22EAC6E9-24D6-4BB5-BE44-B36ACE7C
      forService:[_peripheral.services firstObject]];
 }
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error {
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, service);
+    [self writeLog:[NSString stringWithFormat:@"%s %@", __PRETTY_FUNCTION__, service]];
     for(CBCharacteristic *c in service.characteristics) {
         if([c.UUID.data isEqualToData:_notificationSOurceCharUUID.data]) {
             _notificationSOurceChar = c;
@@ -236,7 +239,7 @@ static NSString * const kDataSourceCharUUID = @"22EAC6E9-24D6-4BB5-BE44-B36ACE7C
     }
 }
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, characteristic);
+//    [self writeLog:[NSString stringWithFormat:@"%s %@", __PRETTY_FUNCTION__, characteristic]];
     [self dumpNotificationSource:characteristic.value];
     /*
     if([characteristic.UUID.data isEqualToData:_notificationSOurceCharUUID.data]) {
@@ -244,11 +247,10 @@ static NSString * const kDataSourceCharUUID = @"22EAC6E9-24D6-4BB5-BE44-B36ACE7C
     }*/
 }
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
-    NSLog(@"%s %@", __PRETTY_FUNCTION__, characteristic);
-    
+    [self writeLog:[NSString stringWithFormat:@"%s %@", __PRETTY_FUNCTION__, characteristic]];
 }
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
-    NSLog(@"%s %@ value:%@", __PRETTY_FUNCTION__, characteristic, characteristic.value);
+    [self writeLog:[NSString stringWithFormat:@"%s %@ value:%@", __PRETTY_FUNCTION__, characteristic, characteristic.value]];
     [self dumpNotificationSource:characteristic.value];
 }
 @end

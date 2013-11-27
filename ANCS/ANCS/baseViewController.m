@@ -48,10 +48,13 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
 }
-#pragma mark Event handlers
-- (IBAction)clearButtonTouchUpInside:(id)sender {
+-(void)clearLog {
     _logText = [[NSMutableString alloc] init];
     _logTextView.text = @"";
+}
+#pragma mark Event handlers
+- (IBAction)clearButtonTouchUpInside:(id)sender {
+    [self clearLog];
 }
 @end
 

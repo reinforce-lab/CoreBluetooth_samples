@@ -37,6 +37,8 @@
     NSString *version = [[UIDevice currentDevice] systemVersion];
     if([version hasPrefix:@"7" ]) {
         _peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil];
+    } else {
+        self.startAdvertisingButton.enabled = NO;
     }
 }
 
