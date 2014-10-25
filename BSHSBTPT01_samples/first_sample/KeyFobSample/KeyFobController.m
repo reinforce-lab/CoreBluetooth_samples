@@ -287,6 +287,7 @@
             break;
         case CBCentralManagerStatePoweredOn:
             self.isBTPoweredOn = YES;
+            [self startScanning]; // iOS8ではステート変更の通知タイミングが遅いよう。なので、ステート変更でスキャン開始するようにした。
             break;
             
         case CBCentralManagerStateResetting:
