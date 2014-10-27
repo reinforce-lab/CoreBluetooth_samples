@@ -425,7 +425,7 @@
  */
 
 - (void)peripheralDidUpdateRSSI:(CBPeripheral *)p error:(NSError *)error {
-    self.deviceRSSI = [p.RSSI integerValue];
+    self.deviceRSSI = (int) [p.RSSI integerValue];
 }
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
